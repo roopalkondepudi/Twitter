@@ -7,5 +7,4 @@
         app:showAsAction="ifRoom"
         android:title="Compose">
     </item>
-
 </menu>
