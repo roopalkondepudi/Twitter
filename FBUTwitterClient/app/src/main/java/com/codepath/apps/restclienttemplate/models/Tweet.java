@@ -17,6 +17,7 @@ public class Tweet
 
     //deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
+
         Tweet tweet = new Tweet();
         //extract values
         tweet.body = jsonObject.getString("text");
@@ -25,6 +26,5 @@ public class Tweet
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
 
         return tweet;
-
     }
 }
