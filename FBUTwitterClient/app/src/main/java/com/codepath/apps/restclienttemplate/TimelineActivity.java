@@ -1,10 +1,12 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.github.scribejava.apis.TwitterApi;
@@ -47,10 +49,16 @@ public class TimelineActivity extends AppCompatActivity {
 
         //set the adapter
         rvTweets.setAdapter(tweetAdapter);
+    }
 
+    /*
+        Adding an Action Item to the ActionBar
+     */
 
-
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.compose, menu);
+        return true;
     }
 
     private void populateTimeline()
@@ -66,12 +74,12 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Log.d("TwitterClient", response.toString());
-                //for each entry, deserealize each JSON entry
+                //for each entry, deserialize each JSON entry
                 for(int i = 0; i < response.length(); i++)
                 {
-                    Tweet tweet = null;
+                    //Tweet tweet = null;
                     try {
-                        tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
                         tweets.add(tweet);
                         tweetAdapter.notifyItemInserted(tweets.size()-1);
                     } catch (JSONException e) {
