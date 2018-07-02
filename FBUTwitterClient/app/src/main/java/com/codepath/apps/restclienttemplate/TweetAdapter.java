@@ -10,11 +10,13 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by roopalk on 7/2/18.
@@ -23,6 +25,7 @@ import butterknife.BindView;
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
 
     //pass in the Tweets array in the constructor
+    Context context;
 
     private List<Tweet> tweets_;
     public TweetAdapter(List<Tweet> tweets)
@@ -34,7 +37,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public TweetAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        Context context = parent.getContext();
+        context = parent.getContext();
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -53,6 +56,11 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         //populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+
+        Glide.with(context)
+        .load(tweet.user.profileImageURL)
+        .into(holder.ivProfileImage);
+
     }
 
     //get the number of items
@@ -74,6 +82,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ViewHolder(View view)
         {
             super(view);
+            ButterKnife.bind(this, view);
 
             //no need to perform findViewById lookups because ButterKnife has bound them already
 
