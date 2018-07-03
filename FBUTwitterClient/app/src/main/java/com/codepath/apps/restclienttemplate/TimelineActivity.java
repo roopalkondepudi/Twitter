@@ -154,7 +154,7 @@ public class TimelineActivity extends AppCompatActivity {
         try
         {
             long dateInMilliseconds = time.parse(dateInJSON).getTime();
-            timeStamp = DateUtils.getRelativeTimeSpanString(dateInMilliseconds, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+            timeStamp = DateUtils.getRelativeTimeSpanString(dateInMilliseconds, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
         }
         catch (ParseException e)
         {
