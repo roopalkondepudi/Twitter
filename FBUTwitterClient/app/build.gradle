@@ -29,6 +29,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    allprojects {
+        repositories {
+            // requires Gradle v4.1+
+            google()
+        }
+    }
 }
 
 dependencies {
@@ -54,4 +61,6 @@ dependencies {
     //Parcel
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
+    //SwipeRefreshLayout
+    implementation 'com.android.support:support-v4:27.1.1'
 }
