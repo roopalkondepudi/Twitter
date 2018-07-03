@@ -22,9 +22,9 @@ public class User
         User user = new User();
 
         //get information from JSON object
-        user.name = jsonObject.getString("name");
+        user.name = jsonObject.getString("name"); //username
         user.uid = jsonObject.getLong("id");
-        user.screenName = jsonObject.getString("screen_name");
+        user.screenName = "@" + jsonObject.getString("screen_name"); //handle
         user.profileImageURL = jsonObject.getString("profile_image_url");
 
         return user;
