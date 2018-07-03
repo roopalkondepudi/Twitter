@@ -28,8 +28,8 @@ public class ComposeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    public void onClick(View v)
-    {
-        Toast.makeText(ComposeActivity.this, "Success", Toast.LENGTH_SHORT).show();
-    }
+//    public void onClick(View v)
+//    {
+//        Toast.makeText(ComposeActivity.this, "Success", Toast.LENGTH_SHORT).show();
+//    }
 }

@@ -36,6 +36,10 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     @BindView(R.id.rvTweet) RecyclerView rvTweets;
 
+    //request helps identify from which intent you came back
+    private final int REQUEST_CODE = 20;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +81,7 @@ public class TimelineActivity extends AppCompatActivity {
         {
             case R.id.tweetCompose:
                 Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
