@@ -2,18 +2,19 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +57,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         //populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+        holder.tvHandle.setText(tweet.user.screenName);
+        holder.tvTimeStamp.setText(this.getTimeStamp(tweet.createdAt));
 
         GlideApp.with(context)
         .load(tweet.user.profileImageURL)
@@ -76,17 +79,65 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
         @BindView(R.id.tvUsername) TextView tvUsername;
         @BindView(R.id.tvBody) TextView tvBody;
+        @BindView(R.id.tvHandle) TextView tvHandle;
+        @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
 
         //constructor for the ViewHolder
 
-        public ViewHolder(View view)
-        {
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
 
             //no need to perform findViewById lookups because ButterKnife has bound them already
 
         }
+    }
 
+    //add the timestamp to every tweet displayed
+    public String getTimeStamp(String dateInJSON)
+    {
+        String twitterDateFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        /*SimpleDateFormat - a class for formatting and parsing dates in a locale-sensitive manner
+         * EEE - day in week (letter I'm guessing, e.g. MON)
+         * MMM - month in year (also letter, e.g. MAY)
+         * dd/HH/mm/ss pretty straightforward time stuff
+         * ZZZZZ - time zone, although I'm not sure why there are 5
+         * yyyy - year
+         */
+        SimpleDateFormat time = new SimpleDateFormat(twitterDateFormat, Locale.ENGLISH);
+        /* Locale - object that represents a specific geographical/political/cultural region
+         * Locale(String language, String country) OR Locale(String country), the latter of which we are using in this context
+         * I could easily say English, US
+         * Country and Language is used with ISO codes
+         */
+
+        /*setLenient the time parsing might be lenient*/
+        time.setLenient(true);
+
+        String timeStamp = "";
+        try
+        {
+            long dateInMilliseconds = time.parse(dateInJSON).getTime();
+            timeStamp = DateUtils.getRelativeTimeSpanString(dateInMilliseconds, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return timeStamp;
+    }
+
+    /* Within the RecyclerView.Adapter class */
+    // Clean all elements of the recycler
+    public void clear() {
+        tweets_.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        tweets_.addAll(list);
+        notifyDataSetChanged();
     }
 }
