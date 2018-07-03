@@ -18,6 +18,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.sql.Time;
 import java.text.ParseException;
@@ -35,6 +36,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     @BindView(R.id.rvTweet) RecyclerView rvTweets;
+    Tweet composedTweet;
 
     //request helps identify from which intent you came back
     private final int REQUEST_CODE = 20;
@@ -60,6 +62,7 @@ public class TimelineActivity extends AppCompatActivity {
 
         //set the adapter
         rvTweets.setAdapter(tweetAdapter);
+
     }
 
     /*
@@ -166,5 +169,22 @@ public class TimelineActivity extends AppCompatActivity {
         }
 
         return timeStamp;
+    }
+
+    /* OnActivityResult to put the tweet inside the ArrayList once the tweet is send back */
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE)
+        {
+            //get tweet
+            composedTweet = Parcels.unwrap(data.getParcelableExtra("myTweet"));
+            //put it into the ArrayList
+            tweets.add(0, composedTweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
     }
 }
