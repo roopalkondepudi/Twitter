@@ -6,26 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.apps.restclienttemplate.ComposeActivity">
 
-    <EditText
-        android:id="@+id/tvTweet"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        android:ems="10"
-        android:hint="What's happening?"
-        android:inputType="text"
-        android:selectAllOnFocus="false"
-        android:singleLine="false" />
+        <EditText
+            android:id="@+id/tvTweet"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
+            android:ems="10"
+            android:hint="What's happening?"
+            android:inputType="text"
+            android:selectAllOnFocus="false"
+            android:singleLine="false" />
 
-    <Button
-        android:id="@+id/btnTweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tvTweet"
-        android:layout_below="@+id/tvTweet"
-        android:onClick="onClick"
-        android:text="Tweet" />
+        <Button
+            android:id="@+id/btnTweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvTweet"
+            android:layout_below="@+id/tvTweet"
+            android:onClick="onSubmit"
+            android:text="Tweet" />
 </RelativeLayout>
