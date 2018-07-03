@@ -34,10 +34,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.codepath.libraries:android-oauth-handler:1.3.1'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     // Glide for remote image loading
-    implementation 'com.github.bumptech.glide:glide:3.8.0'
-    // Android Async Http for sending async network requests
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'    // Android Async Http for sending async network requests
     implementation 'com.loopj.android:android-async-http:1.4.9'
     // Room for simple persistence with an ORM
     implementation "android.arch.persistence.room:runtime:1.0.0"
@@ -48,4 +50,7 @@ dependencies {
     //ButterKnife to reduce boilerplate code
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //Parcel
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
 }

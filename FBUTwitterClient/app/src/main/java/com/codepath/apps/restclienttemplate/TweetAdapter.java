@@ -57,7 +57,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
 
-        Glide.with(context)
+        GlideApp.with(context)
         .load(tweet.user.profileImageURL)
         .into(holder.ivProfileImage);
 
