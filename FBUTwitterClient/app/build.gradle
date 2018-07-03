@@ -41,6 +41,7 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'    // Android Async Http for sending async network requests
     implementation 'com.loopj.android:android-async-http:1.4.9'
+    annotationProcessor "com.github.bumptech.glide:compiler:4.6.1"
     // Room for simple persistence with an ORM
     implementation "android.arch.persistence.room:runtime:1.0.0"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
