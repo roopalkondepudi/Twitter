@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 public class ComposeActivity extends AppCompatActivity {
 
     @BindView(R.id.tvTweet) TextView tvTweet;
-    @BindView(R.id.tweetCompose) Button tweetCompose;
+    @BindView(R.id.btnTweet) Button btnTweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
