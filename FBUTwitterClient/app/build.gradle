@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.codepath.apps.restclienttemplate"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 27
 
         // Room schemas
@@ -64,4 +64,6 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     //SwipeRefreshLayout
     implementation 'com.android.support:support-v4:27.1.1'
+    //Character count
+    implementation 'com.android.support:design:27.1.1'
 }
