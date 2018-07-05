@@ -32,4 +32,20 @@ public class Tweet
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         return tweet;
     }
+
+    public String getBody() {
+        return body;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
