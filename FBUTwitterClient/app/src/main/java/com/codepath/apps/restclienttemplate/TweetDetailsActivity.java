@@ -18,8 +18,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
     @BindView(R.id.tvHandle) TextView tvHandle;
     @BindView(R.id.tvTweetBody) TextView tvTweetBody;
     @BindView(R.id.tvUserName) TextView tvUserName;
+    @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
     @BindView(R.id.ivprofileImage) ImageView ivprofileImage;
     @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
+    //@BindView(R.id.pbLoading) ProgressBar pbLoading;
 
     //the tweet that was clicked on
     Tweet tweet;
@@ -36,10 +38,15 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvHandle.setText(tweet.getUser().getScreenName());
         tvTweetBody.setText(tweet.getBody());
         tvUserName.setText(tweet.getUser().getName());
+        tvTimeStamp.setText(tweet.getCreatedAt());
 
+        // on some click or some loading we need to wait for...
+        //pbLoading.setVisibility(ProgressBar.VISIBLE);
         //setting the image with Glide
         GlideApp.with(this)
                 .load(tweet.getUser().getProfileImageURL())
                 .into(ivprofileImage);
+        // run a background job and once complete
+        //pbLoading.setVisibility(ProgressBar.INVISIBLE);
     }
 }
