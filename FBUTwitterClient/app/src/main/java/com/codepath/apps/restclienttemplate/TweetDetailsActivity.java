@@ -24,6 +24,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
     @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
     //@BindView(R.id.pbLoading) ProgressBar pbLoading;
 
+
+    public final int REQUEST_CODE = 20;
+
     //the tweet that was clicked on
     Tweet tweet;
     @Override

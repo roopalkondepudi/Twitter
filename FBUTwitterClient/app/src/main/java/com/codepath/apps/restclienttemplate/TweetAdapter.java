@@ -34,6 +34,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     Context context;
 
     List<Tweet> tweets_;
+
     public TweetAdapter(List<Tweet> tweets)
     {
         tweets_ = tweets;
@@ -85,6 +86,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         @BindView(R.id.tvBody) TextView tvBody;
         @BindView(R.id.tvHandle) TextView tvHandle;
         @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
+        @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
 
         //constructor for the ViewHolder
 
@@ -93,6 +95,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ButterKnife.bind(this, view);
 
             view.setOnClickListener(this);
+            ivReplyIcon.setOnClickListener(this);
 
             //no need to perform findViewById lookups because ButterKnife has bound them already
         }
@@ -102,19 +105,28 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public void onClick(View v)
         {
             int position = getAdapterPosition();
-
+            //Toast.makeText(context,"click", Toast.LENGTH_LONG).show();
             //check if the position is valid
             if(position != RecyclerView.NO_POSITION)
             {
                 //get tweet at that position
                 Tweet tweet = tweets_.get(position);
 
-                //create intent for new activity
-                Intent intent = new Intent(context, TweetDetailsActivity.class);
-                intent.putExtra("tweet", Parcels.wrap(tweet));
+                if(v.getId() == R.id.ivReplyIcon)
+                {
+                    Intent intent = new Intent(context, ReplyActivity.class);
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    context.startActivity(intent);
+                }
+                else
+                {
+                    //create intent for new activity
+                    Intent intent = new Intent(context, TweetDetailsActivity.class);
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
 
-                //start the new activity
-                context.startActivity(intent);
+                    //start the new activity
+                    context.startActivity(intent);
+                }
             }
         }
     }

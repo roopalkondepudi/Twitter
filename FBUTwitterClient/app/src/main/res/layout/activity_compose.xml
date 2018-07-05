@@ -8,8 +8,11 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textContainer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp"
         app:counterEnabled="true"
         app:counterMaxLength="140">
 
@@ -33,9 +36,9 @@
         android:id="@+id/btnTweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="136dp"
+        android:layout_alignEnd="@+id/textContainer"
+        android:layout_below="@+id/textContainer"
+        android:layout_centerVertical="true"
         android:onClick="onSubmit"
         android:text="Tweet"
         tools:ignore="NotSibling" />

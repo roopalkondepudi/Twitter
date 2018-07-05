@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -186,41 +182,6 @@ public class TimelineActivity extends AppCompatActivity {
         // Hide progress item
         if(miActionProgressItem != null)
             miActionProgressItem.setVisible(false);
-    }
-
-    //add the timestamp to every tweet displayed
-    public String getTimeStamp(String dateInJSON)
-    {
-        String twitterDateFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-        /*SimpleDateFormat - a class for formatting and parsing dates in a locale-sensitive manner
-         * EEE - day in week (letter I'm guessing, e.g. MON)
-         * MMM - month in year (also letter, e.g. MAY)
-         * dd/HH/mm/ss pretty straightforward time stuff
-         * ZZZZZ - time zone, although I'm not sure why there are 5
-         * yyyy - year
-         */
-        SimpleDateFormat time = new SimpleDateFormat(twitterDateFormat, Locale.ENGLISH);
-        /* Locale - object that represents a specific geographical/political/cultural region
-         * Locale(String language, String country) OR Locale(String country), the latter of which we are using in this context
-         * I could easily say English, US
-         * Country and Language is used with ISO codes
-         */
-
-        /*setLenient the time parsing might be lenient*/
-        time.setLenient(true);
-
-        String timeStamp = "";
-        try
-        {
-            long dateInMilliseconds = time.parse(dateInJSON).getTime();
-            timeStamp = DateUtils.getRelativeTimeSpanString(dateInMilliseconds, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-
-        return timeStamp;
     }
 
     /* OnActivityResult to put the tweet inside the ArrayList once the tweet is send back */
