@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -9,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.target.ViewTarget;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +33,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     //pass in the Tweets array in the constructor
     Context context;
 
-    private List<Tweet> tweets_;
+    List<Tweet> tweets_;
     public TweetAdapter(List<Tweet> tweets)
     {
         tweets_ = tweets;
@@ -60,9 +65,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvHandle.setText(tweet.user.screenName);
         holder.tvTimeStamp.setText(this.getTimeStamp(tweet.createdAt));
 
-        GlideApp.with(context)
-        .load(tweet.user.profileImageURL)
-        .into(holder.ivProfileImage);
+        ViewTarget<ImageView, Drawable> into = GlideApp.with(context)
+                .load(tweet.user.profileImageURL)
+                .into(holder.ivProfileImage);
 
     }
 
@@ -73,8 +78,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         return tweets_.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder implements com.codepath.apps.restclienttemplate.ViewHolder, View.OnClickListener {
         //using ButterKnife to reduce boilerplate
         @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
         @BindView(R.id.tvUsername) TextView tvUsername;
@@ -88,8 +92,30 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             super(view);
             ButterKnife.bind(this, view);
 
-            //no need to perform findViewById lookups because ButterKnife has bound them already
+            view.setOnClickListener(this);
 
+            //no need to perform findViewById lookups because ButterKnife has bound them already
+        }
+
+        //onClick to go to the Tweet details
+        @Override
+        public void onClick(View v)
+        {
+            int position = getAdapterPosition();
+
+            //check if the position is valid
+            if(position != RecyclerView.NO_POSITION)
+            {
+                //get tweet at that position
+                Tweet tweet = tweets_.get(position);
+
+                //create intent for new activity
+                Intent intent = new Intent(context, TweetDetailsActivity.class);
+                intent.putExtra("tweet", Parcels.wrap(tweet));
+
+                //start the new activity
+                context.startActivity(intent);
+            }
         }
     }
 
