@@ -10,7 +10,7 @@
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
-        android:icon="@drawable/twitter_icon"
+        android:icon="@mipmap/ic_launcher_twitter"
         android:label="Fake Twitter"
         android:theme="@style/AppTheme">
         <activity
@@ -35,7 +35,8 @@
         </activity>
         <activity android:name=".TimelineActivity" />
         <activity android:name=".ComposeActivity" />
-        <activity android:name=".TweetDetailsActivity"></activity>
+        <activity android:name=".TweetDetailsActivity" />
+        <activity android:name=".ReplyActivity"></activity>
     </application>
 
 </manifest>
