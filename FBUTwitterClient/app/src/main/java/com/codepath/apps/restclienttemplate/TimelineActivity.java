@@ -31,6 +31,7 @@ import cz.msebera.android.httpclient.Header;
 public class TimelineActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeContainer;
+    MenuItem miActionProgressItem;
 
 
     TwitterClient client;
@@ -51,10 +52,11 @@ public class TimelineActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         client = TwitterApp.getRestClient(this);
-        populateTimeline();
-
         //find RecyclerView - done with ButterKnife
         //initialize arrayList (data source)
+
+        populateTimeline();
+
         tweets = new ArrayList<>();
         //construct adapter
         tweetAdapter = new TweetAdapter(tweets);
@@ -82,7 +84,9 @@ public class TimelineActivity extends AppCompatActivity {
 
     public void fetchTimelineAsync(int page) {
        tweets.clear(); //delete all the tweets currently in the list
+       //showProgressBar();
        populateTimeline(); //repopulate the timeline to reload the tweets
+      // hideProgressBar();
        tweetAdapter.addAll(tweets); // add the tweets back into the timeline
        tweetAdapter.notifyDataSetChanged(); // tell the log that something has changed
        swipeContainer.setRefreshing(false); //stop refreshing
@@ -114,19 +118,31 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        //extract action-view from the menu item
+       // ProgressBar progressBar = (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void populateTimeline() {
+        showProgressBar();
         client.getHomeTimeline(new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("TwitterClient", response.toString()); //logging what's happening
+                hideProgressBar();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                showProgressBar();
                 Log.d("TwitterClient", response.toString());
                 //for each entry, deserialize each JSON entry
                 for (int i = 0; i < response.length(); i++) {
-                    //Tweet tweet = null;
                     try {
                         Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
                         tweets.add(tweet);
@@ -135,6 +151,7 @@ public class TimelineActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                hideProgressBar();
             }
 
             @Override
@@ -157,6 +174,18 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        if(miActionProgressItem != null)
+            miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        if(miActionProgressItem != null)
+            miActionProgressItem.setVisible(false);
     }
 
     //add the timestamp to every tweet displayed
