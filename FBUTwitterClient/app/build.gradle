@@ -46,7 +46,8 @@ dependencies {
     // Glide for remote image loading
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
-    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'    // Android Async Http for sending async network requests
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    // Android Async Http for sending async network requests
     implementation 'com.loopj.android:android-async-http:1.4.9'
     annotationProcessor "com.github.bumptech.glide:compiler:4.6.1"
     // Room for simple persistence with an ORM
