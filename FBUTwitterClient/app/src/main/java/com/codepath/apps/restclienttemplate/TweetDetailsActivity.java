@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTweetBody.setText(tweet.getBody());
         tvUserName.setText(tweet.getUser().getName());
         tvTimeStamp.setText(tweet.getCreatedAt());
+        Log.d("time stamp", tvTimeStamp.toString());
+
 
         // on some click or some loading we need to wait for...
         //pbLoading.setVisibility(ProgressBar.VISIBLE);
