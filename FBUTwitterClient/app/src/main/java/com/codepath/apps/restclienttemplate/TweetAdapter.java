@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.text.ParseException;
@@ -24,6 +26,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by roopalk on 7/2/18.
@@ -131,13 +134,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         tweet.favorited = false;
                         //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
                         ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
-                        client.favoriteTweet(tweet.getUid(), new JsonHttpResponseHandler());
                     }
-                    else
-                    {
+                    else {
                         tweet.favorited = true;
                         //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
                         ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+                        client.favoriteTweet(tweet.getUid(), new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                Log.i("TweetDetailsActivity", "favorited!");
+                            }
+                        });
                     }
                 }
                 else

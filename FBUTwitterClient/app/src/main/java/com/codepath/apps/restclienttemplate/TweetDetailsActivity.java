@@ -9,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 public class TweetDetailsActivity extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     //the tweet that was clicked on
     Tweet tweet;
+    TwitterClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
         //unwrapping the tweet
         tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
+        client = TwitterApp.getRestClient(this);
 
         //setting the handle, body, and username
         tvHandle.setText(tweet.getUser().getScreenName());
@@ -69,6 +74,13 @@ public class TweetDetailsActivity extends AppCompatActivity {
                     tweet.favorited = true;
                     //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
                     ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+                    client.favoriteTweet(tweet.getUid(), new JsonHttpResponseHandler()
+                    {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Log.i("TweetDetailsActivity", "favorited!");
+                        }
+                    });
                 }
             }
         });
