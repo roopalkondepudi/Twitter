@@ -87,6 +87,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         @BindView(R.id.tvHandle) TextView tvHandle;
         @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
         @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
+        @BindView(R.id.ivFavoriteIcon) ImageView ivFavoriteIcon;
 
         //constructor for the ViewHolder
 
@@ -96,6 +97,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
             view.setOnClickListener(this);
             ivReplyIcon.setOnClickListener(this);
+            ivFavoriteIcon.setOnClickListener(this);
 
             //no need to perform findViewById lookups because ButterKnife has bound them already
         }
@@ -126,6 +128,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
                     //start the new activity
                     context.startActivity(intent);
+                }
+
+                if(v.getId() == R.id.ivFavoriteIcon)
+                {
+                    if(tweet.getFavorite())
+                    {
+                        tweet.favorited = false;
+                        //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
+                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
+                    }
+                    else
+                    {
+                        tweet.favorited = true;
+                        //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
+                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+                    }
                 }
             }
         }

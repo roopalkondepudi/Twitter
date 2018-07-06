@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -23,6 +24,7 @@ public class ComposeActivity extends AppCompatActivity {
 
     @BindView(R.id.tvTweet) EditText tvTweet;
     @BindView(R.id.btnTweet) Button btnTweet;
+    @BindView(R.id.ivBackButton) ImageView ivBackButton;
 
     TwitterClient client;
     Tweet tweet;
@@ -35,6 +37,17 @@ public class ComposeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         client = TwitterApp.getRestClient(this);
+
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(v.getId() == R.id.ivBackButton)
+                {
+                    finish();
+                }
+            }
+        });
     }
 
     public void onSubmit(View v)

@@ -49,6 +49,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTweetBody.setText(tweet.getBody());
         tvUserName.setText(tweet.getUser().getName());
         tvTimeStamp.setText(tweet.getCreatedAt());
+
         Log.d("time stamp", tvTimeStamp.toString());
 
 

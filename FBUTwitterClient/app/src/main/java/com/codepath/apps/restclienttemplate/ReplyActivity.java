@@ -21,17 +21,15 @@ import cz.msebera.android.httpclient.Header;
 
 public class ReplyActivity extends AppCompatActivity {
 
-    @BindView(R.id.ivReplyingProfileImage) ImageView ivReplyingProfileImage;
     @BindView(R.id.ivReply) ImageView ivReply;
     @BindView(R.id.ivBackButton) ImageView ivBackButton;
     @BindView(R.id.tweetButton) Button replyButton;
-    @BindView(R.id.tvReplyingUsername) TextView tvUsername;
-    @BindView(R.id.tvReplyingScreenname) TextView tvScreenname;
     @BindView(R.id.inReplyTo) TextView inReplyTo;
     @BindView(R.id.etReply) EditText etReply;
 
     String message;
     Tweet tweet;
+    Tweet currentUser;
     TwitterClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +38,21 @@ public class ReplyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         client = TwitterApp.getRestClient(this);
-
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
-
         etReply.setText(tweet.getUser().getScreenName() + " ");
         etReply.setSelection(etReply.getText().toString().length());
 
+
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(v.getId() == R.id.ivBackButton)
+                {
+                    finish();
+                }
+            }
+        });
         //get the name of the person who is being replied to
         String repliedTo = tweet.user.name;
         inReplyTo.setText("In reply to " + repliedTo);
@@ -66,6 +73,5 @@ public class ReplyActivity extends AppCompatActivity {
                 Log.e("ReplyActivity", "failed to reply to tweet");
             }
         });
-
     }
 }
