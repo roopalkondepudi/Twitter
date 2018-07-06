@@ -10,7 +10,7 @@
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_twitter"
+        android:icon="@mipmap/ic_launcher_twitter_round"
         android:label="Fake Twitter"
         android:theme="@style/Twitter">
         <activity
