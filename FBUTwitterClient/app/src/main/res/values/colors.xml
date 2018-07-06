@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="twitter">#074770</color>
-    <color name="TwitterVerifiedBlue">#00aced</color>
+    <color name="TwitterVerifiedBlue">#3a9bd6</color>
     <color name="TwitterLogoBlue">#00aced</color>
-    <color name="TwitterDarkBlue">#0084b4</color>
+    <color name="TwitterDarkBlue">#2196f3</color>
     <color name="TwitterBackgroundBlue">#c0deed</color>
+    <color name="background_material_light">#ffffff</color>
+    <color name="TwitterWhite">#ffffff</color>
+    <color name="twitter_blue">#ff1da1f2</color>
+    <color name="medium_gray">#ffaab8c2</color>
+    <color name="medium_red">#ffe0245e</color>
 </resources>
