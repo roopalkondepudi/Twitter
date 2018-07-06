@@ -25,7 +25,6 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivProfileImage"
         android:layout_below="@+id/tvUsername"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
@@ -56,7 +55,7 @@
         android:layout_alignEnd="@id/ivProfileImage"
         android:layout_below="@id/tvTimeStamp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="45dp"
         app:srcCompat="@drawable/reply_icon" />
 
 </RelativeLayout>

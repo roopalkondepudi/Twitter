@@ -8,9 +8,13 @@
         -->
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+    <style name="Twitter" parent="AppBaseTheme" >
+        <item name="colorPrimary">@color/TwitterVerifiedBlue</item>
+        <item name="colorPrimaryDark">@color/TwitterLogoBlue</item>
+        <item name="colorAccent">@color/TwitterDarkBlue</item>
+        <item name="android:colorBackground">@color/TwitterBackgroundBlue</item>
+        <item name="android:actionBarStyle">@color/TwitterVerifiedBlue</item>
     </style>
 
 </resources>

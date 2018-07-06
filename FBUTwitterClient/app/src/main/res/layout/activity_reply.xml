@@ -62,8 +62,8 @@
 
     <EditText
         android:id="@+id/etReply"
-        android:layout_width="317dp"
-        android:layout_height="298dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/ivReply"
         android:layout_marginTop="134dp"

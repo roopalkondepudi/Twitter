@@ -43,6 +43,9 @@ public class ReplyActivity extends AppCompatActivity {
 
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
 
+        etReply.setText(tweet.getUser().getScreenName() + " ");
+        etReply.setSelection(etReply.getText().toString().length());
+
         //get the name of the person who is being replied to
         String repliedTo = tweet.user.name;
         inReplyTo.setText("In reply to " + repliedTo);
@@ -50,7 +53,7 @@ public class ReplyActivity extends AppCompatActivity {
 
     public void onSubmit(View v)
     {
-        message = tweet.getUser().screenName + " " + etReply.getText().toString(); // get the message
+        message = etReply.getText().toString(); // get the message
         long uid = tweet.getUid();
         client.replyToTweet(message, uid, new JsonHttpResponseHandler()
         {

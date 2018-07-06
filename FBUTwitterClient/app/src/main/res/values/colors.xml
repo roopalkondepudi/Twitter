@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="twitter">#074770</color>
+    <color name="TwitterVerifiedBlue">#00aced</color>
+    <color name="TwitterLogoBlue">#00aced</color>
+    <color name="TwitterDarkBlue">#0084b4</color>
+    <color name="TwitterBackgroundBlue">#c0deed</color>
 </resources>
