@@ -46,7 +46,7 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] User can **select "reply" from home timeline and respond to a tweet**
 
 ## Video Walkthrough
 
