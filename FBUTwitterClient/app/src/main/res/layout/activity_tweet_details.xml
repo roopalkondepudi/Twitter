@@ -62,4 +62,13 @@
         android:layout_alignStart="@id/ivprofileImage"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/reply_icon" />
+
+    <ImageView
+        android:id="@+id/ivFavoriteIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/tvHandle"
+        android:layout_alignTop="@+id/ivReplyIcon"
+        android:onClick="onClick"
+        app:srcCompat="@drawable/ic_vector_heart_stroke" />
 </RelativeLayout>

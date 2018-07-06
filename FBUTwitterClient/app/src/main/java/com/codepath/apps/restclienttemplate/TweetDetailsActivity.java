@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,19 +17,24 @@ import butterknife.ButterKnife;
 public class TweetDetailsActivity extends AppCompatActivity {
 
     //ButterKnife to bind the variables
-    @BindView(R.id.tvHandle) TextView tvHandle;
-    @BindView(R.id.tvTweetBody) TextView tvTweetBody;
-    @BindView(R.id.tvUserName) TextView tvUserName;
-    @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
-    @BindView(R.id.ivprofileImage) ImageView ivprofileImage;
-    @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
-    //@BindView(R.id.pbLoading) ProgressBar pbLoading;
-
-
-    public final int REQUEST_CODE = 20;
+    @BindView(R.id.tvHandle)
+    TextView tvHandle;
+    @BindView(R.id.tvTweetBody)
+    TextView tvTweetBody;
+    @BindView(R.id.tvUserName)
+    TextView tvUserName;
+    @BindView(R.id.tvTimeStamp)
+    TextView tvTimeStamp;
+    @BindView(R.id.ivprofileImage)
+    ImageView ivprofileImage;
+    @BindView(R.id.ivReplyIcon)
+    ImageView ivReplyIcon;
+    @BindView(R.id.ivFavoriteIcon)
+    ImageView ivFavoriteIcon;
 
     //the tweet that was clicked on
     Tweet tweet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +52,27 @@ public class TweetDetailsActivity extends AppCompatActivity {
         Log.d("time stamp", tvTimeStamp.toString());
 
 
-        // on some click or some loading we need to wait for...
-        //pbLoading.setVisibility(ProgressBar.VISIBLE);
+        ivFavoriteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(tweet.getFavorite())
+                {
+                    tweet.favorited = false;
+                    //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
+                    ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
+                }
+                else
+                {
+                    tweet.favorited = true;
+                    //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
+                    ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+                }
+            }
+        });
         //setting the image with Glide
         GlideApp.with(this)
                 .load(tweet.getUser().getProfileImageURL())
                 .into(ivprofileImage);
-        // run a background job and once complete
-        //pbLoading.setVisibility(ProgressBar.INVISIBLE);
     }
 }

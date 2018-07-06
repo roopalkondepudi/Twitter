@@ -22,6 +22,8 @@ public class Tweet
     public long uid; //database ID for the tweet
     public String createdAt;
     public User user;
+    public boolean favorited;
+
     public Tweet()
     {
 
@@ -36,6 +38,7 @@ public class Tweet
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        tweet.favorited = jsonObject.getBoolean("favorited");
         return tweet;
     }
 
@@ -53,6 +56,11 @@ public class Tweet
 
     public User getUser() {
         return user;
+    }
+
+    public boolean getFavorite()
+    {
+        return favorited;
     }
 
     //add the timestamp to every tweet displayed
