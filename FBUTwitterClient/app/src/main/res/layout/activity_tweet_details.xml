@@ -42,8 +42,11 @@
         android:layout_alignStart="@id/ivprofileImage"
         android:layout_marginTop="99dp"
         android:text="TextView"
+        android:autoLink="all"
+        android:linksClickable="true"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        />
 
     <TextView
         android:id="@+id/tvTimeStamp"
