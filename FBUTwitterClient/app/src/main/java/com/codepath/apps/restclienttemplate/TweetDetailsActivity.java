@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -69,6 +70,16 @@ public class TweetDetailsActivity extends AppCompatActivity {
                     //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
                     ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
                 }
+            }
+        });
+
+        ivReplyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ReplyActivity.class);
+                intent.putExtra("tweet", Parcels.wrap(tweet));
+                startActivity(intent);
+
             }
         });
         //setting the image with Glide

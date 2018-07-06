@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.parceler.Parcels;
 
@@ -35,9 +36,12 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     List<Tweet> tweets_;
 
+    TwitterClient client;
+
     public TweetAdapter(List<Tweet> tweets)
     {
         tweets_ = tweets;
+        client = TwitterApp.getRestClient(context);
     }
 
     //for each row, inflate layout and cache references into ViewHolder
@@ -120,6 +124,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     intent.putExtra("tweet", Parcels.wrap(tweet));
                     context.startActivity(intent);
                 }
+                else if(v.getId() == R.id.ivFavoriteIcon)
+                {
+                    if(tweet.getFavorite())
+                    {
+                        tweet.favorited = false;
+                        //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
+                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
+                        client.favoriteTweet(tweet.getUid(), new JsonHttpResponseHandler());
+                    }
+                    else
+                    {
+                        tweet.favorited = true;
+                        //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
+                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+                    }
+                }
                 else
                 {
                     //create intent for new activity
@@ -128,22 +148,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
                     //start the new activity
                     context.startActivity(intent);
-                }
-
-                if(v.getId() == R.id.ivFavoriteIcon)
-                {
-                    if(tweet.getFavorite())
-                    {
-                        tweet.favorited = false;
-                        //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
-                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
-                    }
-                    else
-                    {
-                        tweet.favorited = true;
-                        //Toast.makeText(getBaseContext(), "favorited", Toast.LENGTH_LONG).show();
-                        ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
-                    }
                 }
             }
         }
