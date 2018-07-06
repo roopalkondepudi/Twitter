@@ -17,5 +17,4 @@
         <item name="android:colorBackground">@color/TwitterWhite</item>
         <item name="android:actionBarStyle">@color/TwitterVerifiedBlue</item>
     </style>
-
 </resources>
