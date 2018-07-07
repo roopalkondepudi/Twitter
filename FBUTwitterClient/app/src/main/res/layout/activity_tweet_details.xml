@@ -61,9 +61,9 @@
         android:id="@+id/ivReplyIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/tvTimeStamp"
-        android:layout_alignStart="@id/ivprofileImage"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/ivprofileImage"
+        android:layout_marginTop="180dp"
         app:srcCompat="@drawable/reply_icon" />
 
     <ImageView

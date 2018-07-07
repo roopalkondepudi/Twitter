@@ -23,6 +23,9 @@ public class Tweet
     public String createdAt;
     public User user;
     public boolean favorited;
+    public String imageURL = null;
+
+
 
     public Tweet()
     {
@@ -39,6 +42,8 @@ public class Tweet
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.favorited = jsonObject.getBoolean("favorited");
+        if(jsonObject.getJSONObject("entities").has("media"))
+            tweet.imageURL = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url");
         return tweet;
     }
 

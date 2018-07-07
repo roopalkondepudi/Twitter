@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
@@ -68,6 +69,18 @@ public class TweetDetailsActivity extends AppCompatActivity {
                     tweet.favorited = false;
                     //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
                     ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
+                    client.unFavorite(tweet.getUid(), new JsonHttpResponseHandler()
+                    {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Log.i("HomeTimeLine", "unfavorited!");
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                            Log.e("HomeTimeLine", throwable.getMessage());
+                        }
+                    });
                 }
                 else
                 {

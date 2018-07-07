@@ -2,7 +2,6 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -12,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.request.target.ViewTarget;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
@@ -73,9 +72,33 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvHandle.setText(tweet.user.screenName);
         holder.tvTimeStamp.setText(this.getTimeStamp(tweet.createdAt));
 
-        ViewTarget<ImageView, Drawable> into = GlideApp.with(context)
+        GlideApp.with(context)
                 .load(tweet.user.profileImageURL)
                 .into(holder.ivProfileImage);
+
+        //checking if there is an image or not
+
+        if(tweet.favorited)
+        {
+            holder.ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+        }
+        else
+        {
+            holder.ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
+
+        }
+
+        if(tweet.imageURL == null)
+        {
+            holder.ivEmbeddedImage.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.ivEmbeddedImage.setVisibility(View.VISIBLE);
+            GlideApp.with(context)
+                    .load(tweet.imageURL)
+                    .into(holder.ivEmbeddedImage);
+        }
 
     }
 
@@ -95,12 +118,13 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         @BindView(R.id.tvTimeStamp) TextView tvTimeStamp;
         @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
         @BindView(R.id.ivFavoriteIcon) ImageView ivFavoriteIcon;
-
+        @BindView(R.id.ivEmbeddedImage) ImageView ivEmbeddedImage;
         //constructor for the ViewHolder
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
 
             view.setOnClickListener(this);
             ivReplyIcon.setOnClickListener(this);
@@ -134,6 +158,18 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         tweet.favorited = false;
                         //Toast.makeText(getBaseContext(), "unfavorited", Toast.LENGTH_LONG).show();
                         ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
+                        client.unFavorite(tweet.getUid(), new JsonHttpResponseHandler()
+                        {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                Log.i("HomeTimeLine", "unfavorited!");
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                Log.e("HomeTimeLine", throwable.getMessage());
+                            }
+                        });
                     }
                     else {
                         tweet.favorited = true;
