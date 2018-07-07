@@ -52,21 +52,20 @@
 
     <ImageView
         android:id="@+id/ivReplyIcon"
-        android:layout_width="21dp"
+        android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@id/ivEmbeddedImage"
-        android:layout_marginStart="11dp"
+        android:layout_alignEnd="@+id/ivProfileImage"
+        android:layout_alignTop="@+id/ivFavoriteIcon"
         app:srcCompat="@drawable/reply_icon" />
 
     <ImageView
         android:id="@+id/ivFavoriteIcon"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
         android:onClick="onClick"
-        android:layout_below="@id/ivEmbeddedImage"
         app:srcCompat="@drawable/ic_vector_heart_stroke" />
 
     <ImageView

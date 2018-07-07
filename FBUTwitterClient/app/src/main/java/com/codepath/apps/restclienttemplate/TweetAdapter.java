@@ -84,8 +84,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         }
         else
         {
-            holder.ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart);
-
+            holder.ivFavoriteIcon.setImageResource(R.drawable.ic_vector_heart_stroke);
         }
 
         if(tweet.imageURL == null)
